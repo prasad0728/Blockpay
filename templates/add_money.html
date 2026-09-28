@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Money | BlockPay</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f2f5fa;
+}
+
+header{
+    width:100%;
+    background:#0d6efd;
+    color:#fff;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:28px;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:400px;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.card h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:30px;
+}
+
+.balance{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.balance h3{
+    color:#666;
+}
+
+.balance h2{
+    color:green;
+    margin-top:10px;
+    font-size:32px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:25px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#0d6efd;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#084298;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    text-decoration:none;
+    color:#0d6efd;
+    font-weight:600;
+}
+
+.flash{
+    margin-bottom:20px;
+}
+
+.flash p{
+    background:#d4edda;
+    color:#155724;
+    padding:12px;
+    border-radius:6px;
+    margin-bottom:10px;
+}
+
+@media(max-width:500px){
+
+.card{
+    width:90%;
+    padding:30px;
+}
+
+header{
+    flex-direction:column;
+    gap:10px;
+}
+
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>BlockPay</h2>
+
+<a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Add Money</h1>
+
+{% with messages=get_flashed_messages() %}
+{% if messages %}
+
+<div class="flash">
+
+{% for message in messages %}
+
+<p>{{ message }}</p>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+{% endwith %}
+
+<div class="balance">
+
+<h3>Current Wallet Balance</h3>
+
+<h2>₹ {{ balance }}</h2>
+
+</div>
+
+<form action="{{ url_for('add_money') }}" method="POST">
+
+<label>Enter Amount</label>
+
+<input
+type="number"
+name="amount"
+placeholder="Enter amount"
+min="1"
+required>
+
+<button type="submit">
+
+Add Money
+
+</button>
+
+</form>
+
+<a href="{{ url_for('dashboard') }}" class="back">
+
+← Back to Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

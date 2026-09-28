@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockPay</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    color:#333;
+}
+
+header{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:#0d6efd;
+    color:#fff;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+.logo h2{
+    font-size:30px;
+    font-weight:600;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:18px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ffd43b;
+}
+
+.hero{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(135deg,#0d6efd,#6610f2);
+    color:white;
+    padding:20px;
+}
+
+.hero-text{
+    max-width:700px;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:35px;
+    line-height:1.8;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:white;
+    color:#0d6efd;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#ffd43b;
+    color:black;
+}
+
+#features{
+    padding:80px 10%;
+    background:white;
+}
+
+#features h2{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:50px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card h3{
+    color:#0d6efd;
+    margin-bottom:15px;
+}
+
+.card p{
+    line-height:1.7;
+}
+
+#about{
+    padding:80px 10%;
+    text-align:center;
+    background:#eef3ff;
+}
+
+#about h2{
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+#about p{
+    font-size:18px;
+    line-height:1.8;
+    max-width:900px;
+    margin:auto;
+}
+
+footer{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:20px;
+    font-size:16px;
+}
+
+@media(max-width:768px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+nav a{
+    margin:10px;
+}
+
+.hero h1{
+    font-size:38px;
+}
+
+.hero p{
+    font-size:17px;
+}
+ 
+}
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <h2>BlockPay</h2>
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="{{ url_for('index') }}">Login</a>
+
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>Secure Digital Payments using Blockchain</h1>
+
+        <p>
+            Fast, Secure and Transparent Payment Platform powered by Blockchain Technology.
+        </p>
+
+        <a href="{{ url_for('index') }}" class="btn">
+            Get Started
+        </a>
+
+    </div>
+
+</section>
+
+<section id="features">
+
+    <h2>Features</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Secure</h3>
+            <p>All transactions are encrypted and protected.</p>
+        </div>
+
+        <div class="card">
+            <h3>Fast</h3>
+            <p>Transfer money within seconds.</p>
+        </div>
+
+        <div class="card">
+            <h3>Transparent</h3>
+            <p>Every transaction can be verified.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about">
+
+    <h2>About BlockPay</h2>
+
+    <p>
+        BlockPay is a blockchain-based payment system developed using Flask and MySQL.
+        It provides secure authentication and transaction management.
+    </p>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 BlockPay. All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

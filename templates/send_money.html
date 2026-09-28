@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Send Money | ChainPay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#eef2f7;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 8%;
+}
+
+header h2{
+    font-size:28px;
+}
+
+header a{
+    text-decoration:none;
+    background:white;
+    color:#0d6efd;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+header a:hover{
+    background:#ffd43b;
+    color:black;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:60px;
+}
+
+.card{
+
+    width:420px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.card h1{
+
+    text-align:center;
+
+    color:#0d6efd;
+
+    margin-bottom:10px;
+
+}
+
+.card p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+input:focus{
+
+    border-color:#0d6efd;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#0d6efd;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#084298;
+
+}
+
+.info{
+
+    margin-top:25px;
+
+    background:#eef4ff;
+
+    padding:15px;
+
+    border-radius:10px;
+
+}
+
+.info h3{
+
+    color:#0d6efd;
+
+    margin-bottom:10px;
+
+}
+
+.flash{
+
+    margin-bottom:20px;
+
+}
+
+.flash p{
+
+    background:#ffe5e5;
+
+    color:#b00020;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    margin-bottom:10px;
+
+}
+
+@media(max-width:500px){
+
+.card{
+
+    width:90%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>ChainPay</h2>
+
+<a href="{{ url_for('dashboard') }}">
+Dashboard
+</a>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Send Money</h1>
+
+<p>Transfer money securely using username.</p>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash">
+
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+<form action="{{ url_for('send_money') }}" method="POST">
+
+<label>Receiver Username</label>
+
+<input
+type="text"
+name="receiver"
+placeholder="@username"
+required>
+
+<label>Amount (₹)</label>
+
+<input
+type="number"
+name="amount"
+placeholder="Enter amount"
+min="1"
+step="0.01"
+required>
+UPI PIN
+
+<input
+type="password"
+name="upi_pin"
+maxlength="4"
+required>
+
+<button type="submit">
+
+Send Money
+
+</button>
+
+</form>
+
+<div class="info">
+
+<h3>Instructions</h3>
+
+<p>✔ Enter the receiver's username.</p>
+
+<p>✔ Ensure sufficient wallet balance.</p>
+
+<p>✔ Amount will be transferred instantly.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

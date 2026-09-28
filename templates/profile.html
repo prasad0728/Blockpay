@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | ChainPay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#eef2f7;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:28px;
+}
+
+header a{
+    text-decoration:none;
+    background:white;
+    color:#0d6efd;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+header a:hover{
+    background:#ffd43b;
+    color:black;
+}
+
+.container{
+
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+
+}
+
+.profile-card{
+
+    background:white;
+    border-radius:15px;
+    padding:40px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.avatar{
+
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:#0d6efd;
+    color:white;
+    font-size:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+
+}
+
+.profile-card h1{
+
+    text-align:center;
+    margin-top:20px;
+    color:#0d6efd;
+
+}
+
+.profile-card p{
+
+    text-align:center;
+    color:#666;
+    margin-bottom:35px;
+
+}
+
+.details{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+
+}
+
+.box{
+
+    background:#f5f7ff;
+    border-left:5px solid #0d6efd;
+    padding:20px;
+    border-radius:10px;
+
+}
+
+.box h3{
+
+    color:#0d6efd;
+    margin-bottom:10px;
+
+}
+
+.wallet{
+
+    background:#0d6efd;
+    color:white;
+
+}
+
+.wallet h3{
+
+    color:white;
+
+}
+
+.wallet h1{
+    color:white;
+    margin-top:10px;
+    font-size:35px;
+
+}
+
+.actions{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:40px;
+
+}
+
+.actions a{
+
+    text-decoration:none;
+    background:#0d6efd;
+    color:white;
+    padding:12px 25px;
+    border-radius:8px;
+    transition:.3s;
+
+}
+
+.actions a:hover{
+
+    background:#084298;
+
+}
+
+@media(max-width:768px){
+
+header{
+
+    flex-direction:column;
+    gap:15px;
+
+}
+
+.profile-card{
+
+    padding:25px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>ChainPay</h2>
+
+<a href="{{ url_for('dashboard') }}">
+Dashboard
+</a>
+
+</header>
+
+<div class="container">
+
+<div class="profile-card">
+
+<div class="avatar">
+
+{{ user.fullname[0]|upper }}
+
+</div>
+
+<h1>{{ user.fullname }}</h1>
+
+<p>{{ user.username }}</p>
+
+<div class="details">
+
+<div class="box">
+
+<h3>Username</h3>
+
+<p>{{ user.username }}</p>
+
+</div>
+
+<div class="box">
+
+<h3>Mobile Number</h3>
+
+<p>{{ user.mobile }}</p>
+
+</div>
+
+<div class="box wallet">
+
+<h3>Wallet Balance</h3>
+
+<h1>₹ {{ user.balance }}</h1>
+
+</div>
+
+<div class="box">
+
+<h3>Account Status</h3>
+
+<p>Active</p>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<a href="{{ url_for('send_page') }}">
+💸 Send Money
+</a>
+
+<a href="{{ url_for('history') }}">
+📜 History
+</a>
+
+<a href="{{ url_for('logout') }}">
+🚪 Logout
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

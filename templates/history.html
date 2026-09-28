@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transaction History | ChainPay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#eef2f7;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:28px;
+}
+
+header a{
+    text-decoration:none;
+    background:white;
+    color:#0d6efd;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+header a:hover{
+    background:#ffd43b;
+    color:black;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.card h1{
+    color:#0d6efd;
+    margin-bottom:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:10px;
+}
+
+thead{
+    background:#0d6efd;
+    color:white;
+}
+
+th{
+    padding:15px;
+    text-align:center;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #e5e5e5;
+}
+
+tbody tr:hover{
+    background:#f5f9ff;
+}
+
+.credit{
+    color:green;
+    font-weight:bold;
+}
+
+.debit{
+    color:red;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    color:#777;
+    font-size:18px;
+    padding:40px;
+}
+
+@media(max-width:768px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>ChainPay</h2>
+
+<a href="{{ url_for('dashboard') }}">
+🏠 Dashboard
+</a>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>📜 Transaction History</h1>
+
+{% if transactions %}
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>From</th>
+
+<th>To</th>
+
+<th>Amount</th>
+
+<th>Date & Time</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for t in transactions %}
+
+<tr>
+
+<td>{{ t.sender }}</td>
+
+<td>{{ t.receiver }}</td>
+
+<td>
+
+{% if t.sender == user.username %}
+
+<span class="debit">
+- ₹{{ "%.2f"|format(t.amount) }}
+</span>
+
+{% else %}
+
+<span class="credit">
++ ₹{{ "%.2f"|format(t.amount) }}
+</span>
+
+{% endif %}
+
+</td>
+
+<td>{{ t.transaction_time }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="empty">
+
+No transactions found.
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

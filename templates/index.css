@@ -1,0 +1,149 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0d6efd,#6610f2);
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+}
+
+.box{
+    display:flex;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.left-panel{
+    width:40%;
+    background:#0d6efd;
+    color:white;
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.left-panel h1{
+    margin-bottom:15px;
+    font-size:36px;
+}
+
+.left-panel p{
+    margin-bottom:30px;
+    line-height:1.7;
+}
+
+.left-panel button{
+    width:180px;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.left-panel button:hover{
+    transform:scale(1.05);
+}
+
+.right-panel{
+    width:60%;
+    padding:50px;
+}
+
+.right-panel h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#0d6efd;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:18px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#0d6efd;
+}
+
+form button{
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#0d6efd;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+form button:hover{
+    background:#084298;
+}
+
+.flash{
+    margin-bottom:20px;
+}
+
+.flash p{
+    background:#ffe5e5;
+    color:#d00000;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+@media(max-width:768px){
+
+.box{
+    flex-direction:column;
+}
+
+.left-panel,
+.right-panel{
+    width:100%;
+}
+
+.left-panel{
+    padding:40px 25px;
+}
+
+.right-panel{
+    padding:35px 25px;
+}
+
+.left-panel h1{
+    font-size:30px;
+}
+
+}

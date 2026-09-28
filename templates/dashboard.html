@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ChainPay Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+header{
+background:#0d6efd;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+}
+
+header h2{
+font-size:28px;
+}
+
+.logout{
+text-decoration:none;
+background:white;
+color:#0d6efd;
+padding:10px 20px;
+border-radius:8px;
+font-weight:600;
+}
+
+.logout:hover{
+background:#ffd43b;
+color:black;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:35px auto;
+}
+
+.flash{
+margin-bottom:20px;
+}
+
+.flash p{
+background:#d1e7dd;
+color:#0f5132;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.welcome{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.profile{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.box{
+background:#eef4ff;
+padding:20px;
+border-radius:10px;
+}
+
+.box h3{
+margin-bottom:10px;
+color:#0d6efd;
+}
+
+.balance{
+background:#0d6efd;
+color:white;
+}
+
+.balance h3{
+color:white;
+}
+
+.balance h1{
+margin-top:10px;
+font-size:38px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:35px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h2{
+font-size:45px;
+margin-bottom:15px;
+}
+
+.card a{
+display:inline-block;
+margin-top:15px;
+text-decoration:none;
+background:#0d6efd;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+}
+
+.card a:hover{
+background:#084298;
+}
+
+table{
+width:100%;
+margin-top:35px;
+background:white;
+border-collapse:collapse;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+table th{
+background:#0d6efd;
+color:white;
+padding:15px;
+}
+
+table td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.credit{
+color:green;
+font-weight:bold;
+}
+
+.debit{
+color:red;
+font-weight:bold;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+table{
+display:block;
+overflow-x:auto;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>ChainPay</h2>
+
+<a href="{{ url_for('logout') }}" class="logout">
+Logout
+</a>
+
+</header>
+
+<div class="container">
+
+{% with messages=get_flashed_messages() %}
+{% if messages %}
+
+<div class="flash">
+
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
+</div>
+
+{% endif %}
+{% endwith %}
+
+<div class="welcome">
+
+<h1>Hello, {{ fullname }}</h1>
+
+<p>Welcome back to your ChainPay wallet.</p>
+
+<div class="profile">
+
+<div class="box">
+
+<h3>Username</h3>
+
+<p>{{ username }}</p>
+
+</div>
+
+<div class="box">
+
+<h3>Mobile</h3>
+
+<p>{{ mobile }}</p>
+
+</div>
+
+<div class="box balance">
+
+<h3>Wallet Balance</h3>
+
+<h1>₹ {{ balance }}</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h2>💸</h2>
+
+<h3>Send Money</h3>
+
+<p>Transfer money using username.</p>
+
+<a href="{{ url_for('send_page') }}">
+Open
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💰</h2>
+
+<h3>Add Money</h3>
+
+<p>Add balance to wallet.</p>
+
+<a href="{{ url_for('add_money') }}">
+Open
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>📜</h2>
+
+<h3>History</h3>
+
+<p>View your transactions.</p>
+
+<a href="{{ url_for('history') }}">
+Open
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>👤</h2>
+
+<h3>Profile</h3>
+
+<p>Manage your account.</p>
+
+<a href="{{ url_for('profile') }}">
+Open
+</a>
+
+</div>
+
+<div class="card">
+
+
+<h3>QR Code</h3>
+
+<p>Share to get money</p>
+
+<img src="{{ url_for('static', filename=user.qr_code) }}"
+     width="200"
+     alt="QR Code">
+
+</div>
+
+</div>
+
+<h2 style="margin-top:40px;">Recent Transactions</h2>
+
+<table>
+
+<tr>
+
+<th>Sender</th>
+
+<th>Receiver</th>
+
+<th>Amount</th>
+
+<th>Date</th>
+
+</tr>
+
+{% for t in transactions[:5] %}
+
+<tr>
+
+<td>{{ t.sender }}</td>
+
+<td>{{ t.receiver }}</td>
+
+<td>
+
+{% if t.sender == user.username %}
+
+<span class="debit">- ₹{{ t.amount }}</span>
+
+{% else %}
+
+<span class="credit">+ ₹{{ t.amount }}</span>
+
+{% endif %}
+
+</td>
+
+<td>{{ t.transaction_time }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+</div>
+
+</body>
+</html>
