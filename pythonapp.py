@@ -40,6 +40,7 @@ app.config["SECRET_KEY"] = os.getenv(
 # This connection is used only to create the database.
 MYSQL_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
+    "port": int(os.getenv("DB_PORT", "3306")),
     "user": os.getenv("DB_USER", "root"),
     "password": os.getenv("DB_PASSWORD", "")
 }
@@ -72,10 +73,13 @@ def create_database():
     try:
 
         connection = mysql.connector.connect(
-            host=MYSQL_CONFIG["host"],
-            user=MYSQL_CONFIG["user"],
-            password=MYSQL_CONFIG["password"]
-        )
+        host=MYSQL_CONFIG["host"],
+        port=MYSQL_CONFIG["port"],
+        user=MYSQL_CONFIG["user"],
+        password=MYSQL_CONFIG["password"],
+        database=DB_NAME
+    )
+    
 
         if connection.is_connected():
 
